@@ -10,12 +10,67 @@
     <p>Source actuelle: {{ useAPI ? 'API REST Countries' : 'Données locales' }}</p>
   </div>
 
+  <!-- Filtres et tri -->
+  <div class="filters-container" *ngIf="!loading">
+    <div class="filter-row">
+      <div class="search-filter">
+        <label for="search">Rechercher par nom:</label>
+        <input 
+          id="search"
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearchChange()"
+          placeholder="Tapez le nom d'un pays..."
+          class="search-input">
+      </div>
+
+      <div class="continent-filter">
+        <label for="continent">Filtrer par continent:</label>
+        <select 
+          id="continent"
+          [(ngModel)]="selectedContinent" 
+          (change)="onContinentChange()"
+          class="continent-select">
+          <option value="">Tous les continents</option>
+          <option *ngFor="let continent of continents" [value]="continent">{{ continent }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sort-row">
+      <div class="sort-filter">
+        <label for="sort">Trier par:</label>
+        <select 
+          id="sort"
+          [(ngModel)]="sortBy" 
+          (change)="onSortChange()"
+          class="sort-select">
+          <option value="name">Nom</option>
+          <option value="population">Population</option>
+          <option value="continent">Continent</option>
+        </select>
+      </div>
+
+      <button 
+        class="sort-order-btn" 
+        (click)="toggleSortOrder()"
+        [title]="sortOrder === 'asc' ? 'Tri croissant' : 'Tri décroissant'">
+        {{ sortOrder === 'asc' ? '↑' : '↓' }}
+        {{ sortOrder === 'asc' ? 'Croissant' : 'Décroissant' }}
+      </button>
+    </div>
+
+    <div class="results-info">
+      <p>{{ filteredCountries.length }} pays trouvé(s)</p>
+    </div>
+  </div>
+
   <div *ngIf="loading" class="loading">
     <p>Chargement des pays...</p>
   </div>
 
   <div class="countries-grid" *ngIf="!loading">
-    <div class="country-card" *ngFor="let country of countries">
+    <div class="country-card" *ngFor="let country of filteredCountries">
       <div class="country-flag" *ngIf="country.flag">
         <img [src]="country.flag" [alt]="country.name + ' flag'">
       </div>
@@ -26,6 +81,9 @@
         </p>
         <p class="country-population">
           <strong>Population:</strong> {{ country.population | number }}
+        </p>
+        <p class="country-continent">
+          <strong>Continent:</strong> {{ country.continent }}
         </p>
       </div>
     </div>
