@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './footer.html',
   styleUrl: './footer.scss'
 })
-export class Footer {
+export class FooterComponent {
   newsletterEmail: string = '';
   currentYear: number = new Date().getFullYear();
 

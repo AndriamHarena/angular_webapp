@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { TestToastComponent } from './test-toast.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'test-toast', component: TestToastComponent },
   { path: '**', redirectTo: 'home' }
 ];

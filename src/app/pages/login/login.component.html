@@ -33,9 +33,9 @@
       </div>
       
       <button 
-        type="submit" 
+        type="button" 
         class="login-button"
-        [disabled]="!loginForm.form.valid"
+        (click)="onSubmit()"
       >
         Se connecter
       </button>

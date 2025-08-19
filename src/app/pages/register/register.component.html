@@ -75,9 +75,9 @@
       </div>
       
       <button 
-        type="submit" 
+        type="button" 
         class="register-button"
-        [disabled]="!registerForm.form.valid"
+        (click)="onSubmit()"
       >
         S'inscrire
       </button>
