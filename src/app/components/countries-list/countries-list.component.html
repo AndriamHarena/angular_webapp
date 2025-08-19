@@ -1,0 +1,36 @@
+<div class="countries-container">
+  <div class="countries-header">
+    <h2>Liste des Pays</h2>
+    <button class="toggle-button" (click)="toggleDataSource()">
+      {{ useAPI ? 'Utiliser données locales' : 'Utiliser API REST' }}
+    </button>
+  </div>
+
+  <div class="data-source-info">
+    <p>Source actuelle: {{ useAPI ? 'API REST Countries' : 'Données locales' }}</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Chargement des pays...</p>
+  </div>
+
+  <div class="countries-grid" *ngIf="!loading">
+    <div class="country-card" *ngFor="let country of countries">
+      <div class="country-flag" *ngIf="country.flag">
+        <img [src]="country.flag" [alt]="country.name + ' flag'">
+      </div>
+      <div class="country-info">
+        <h3 class="country-name">{{ country.name }}</h3>
+        <p class="country-capital">
+          <strong>Capitale:</strong> {{ country.capital }}
+        </p>
+        <p class="country-region">
+          <strong>Région:</strong> {{ country.region }}
+        </p>
+        <p class="country-population">
+          <strong>Population:</strong> {{ country.population | number }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
