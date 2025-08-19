@@ -1,63 +1,67 @@
-.main-content {
-  min-height: calc(100vh - 200px);
+// Banner is now outside main-content for full width
+.banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-top: 0;
   
-  .banner {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 4rem 0;
-    text-align: center;
+  .banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
     
-    .banner-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 2rem;
+    .banner-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
       
-      .banner-title {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-        
-        @media (max-width: 768px) {
-          font-size: 2rem;
-        }
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+    
+    .banner-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+    
+    .cta-button {
+      background-color: #9415F0;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(148, 21, 240, 0.3);
+      
+      &:hover {
+        background-color: #7c11cc;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(148, 21, 240, 0.4);
       }
       
-      .banner-subtitle {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-        line-height: 1.6;
-        
-        @media (max-width: 768px) {
-          font-size: 1rem;
-        }
-      }
-      
-      .cta-button {
-        background-color: #9415F0;
-        color: white;
-        border: none;
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(148, 21, 240, 0.3);
-        
-        &:hover {
-          background-color: #7c11cc;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(148, 21, 240, 0.4);
-        }
-        
-        &:active {
-          transform: translateY(0);
-        }
+      &:active {
+        transform: translateY(0);
       }
     }
   }
+}
+
+.main-content {
+  min-height: calc(100vh - 200px);
   
   .centered-section {
     padding: 4rem 0;

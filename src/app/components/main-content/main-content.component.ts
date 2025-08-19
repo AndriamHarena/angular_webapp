@@ -10,4 +10,13 @@ import { CountriesListComponent } from '../countries-list/countries-list.compone
 })
 export class MainContentComponent {
 
+  scrollToCountries() {
+    const countriesSection = document.getElementById('countries-section');
+    if (countriesSection) {
+      countriesSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
 }

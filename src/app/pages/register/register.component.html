@@ -1,0 +1,90 @@
+<div class="register-container">
+  <div class="register-card">
+    <h1 class="register-title">Inscription</h1>
+    <p class="register-subtitle">Créez votre compte</p>
+    
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="register-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Prénom</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName"
+            [(ngModel)]="registerData.firstName"
+            required
+            class="form-control"
+            placeholder="Votre prénom"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Nom</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName"
+            [(ngModel)]="registerData.lastName"
+            required
+            class="form-control"
+            placeholder="Votre nom"
+          >
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          [(ngModel)]="registerData.email"
+          required
+          email
+          class="form-control"
+          placeholder="votre@email.com"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password"
+          [(ngModel)]="registerData.password"
+          required
+          minlength="6"
+          class="form-control"
+          placeholder="••••••••"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword"
+          [(ngModel)]="registerData.confirmPassword"
+          required
+          minlength="6"
+          class="form-control"
+          placeholder="••••••••"
+        >
+      </div>
+      
+      <button 
+        type="submit" 
+        class="register-button"
+        [disabled]="!registerForm.form.valid"
+      >
+        S'inscrire
+      </button>
+    </form>
+    
+    <div class="register-footer">
+      <p>Déjà un compte ? <a routerLink="/login" class="login-link">Se connecter</a></p>
+    </div>
+  </div>
+</div>

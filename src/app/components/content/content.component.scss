@@ -1,0 +1,17 @@
+.content-wrapper {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  
+  .content-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem 2rem 2rem;
+    flex: 1;
+    
+    @media (max-width: 768px) {
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+}

@@ -1,26 +1,15 @@
+<!-- Banner Section - Full Width -->
+<section class="banner">
+  <div class="banner-content">
+    <h1 class="banner-title">Explorez les pays du monde</h1>
+    <p class="banner-subtitle">Notre application vous permet de découvrir des informations détaillées sur tous les pays du monde, leurs capitales et leurs populations.</p>
+    <button class="cta-button" (click)="scrollToCountries()">Commencer l'exploration</button>
+  </div>
+</section>
+
 <main class="main-content">
-  <!-- Banner Section -->
-  <section class="banner">
-    <div class="banner-content">
-      <h1 class="banner-title">Bienvenue sur notre plateforme Angular</h1>
-      <p class="banner-subtitle">Découvrez les pays du monde entier avec notre application moderne</p>
-      <button class="cta-button">Commencer l'exploration</button>
-    </div>
-  </section>
-
-  <!-- Centered Content Section -->
-  <section class="centered-section">
-    <div class="container">
-      <h2 class="section-title">Explorez les pays du monde</h2>
-      <p class="section-description">
-        Notre application vous permet de découvrir des informations détaillées sur tous les pays du monde, 
-        leurs capitales et leurs populations.
-      </p>
-    </div>
-  </section>
-
   <!-- Countries List Section -->
-  <section class="countries-section">
+  <section class="countries-section" id="countries-section">
     <app-countries-list></app-countries-list>
   </section>
 </main>

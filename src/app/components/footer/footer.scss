@@ -117,21 +117,24 @@
           
           button {
             padding: 0.75rem 1.5rem;
-            background-color: #1976d2;
+            background-color: #9415F0;
             color: #ffffff;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(148, 21, 240, 0.3);
             
             &:hover {
-              background-color: #1565c0;
+              background-color: #7c11cc;
+              transform: translateY(-2px);
+              box-shadow: 0 6px 20px rgba(148, 21, 240, 0.4);
             }
             
             &:active {
-              transform: translateY(1px);
+              transform: translateY(0);
             }
           }
         }

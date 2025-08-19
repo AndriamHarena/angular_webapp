@@ -29,16 +29,16 @@
       }
     }
     
-    .nav-links {
-      ul {
+    .nav {
+      .nav-list {
         list-style: none;
         margin: 0;
         padding: 0;
         display: flex;
         gap: 2rem;
         
-        li {
-          a {
+        .nav-item {
+          .nav-link {
             text-decoration: none;
             color: #424242;
             font-weight: 500;
@@ -69,12 +69,12 @@
         }
       }
       
-      .nav-links ul {
+      .nav .nav-list {
         gap: 0.5rem;
         flex-wrap: wrap;
         justify-content: center;
         
-        li a {
+        .nav-item .nav-link {
           font-size: 0.95rem;
           padding: 0.6rem 1rem;
         }
@@ -86,14 +86,14 @@
 @media (max-width: 480px) {
   .header {
     .header-content {
-      .nav-links ul {
+      .nav .nav-list {
         flex-direction: column;
         width: 100%;
         
-        li {
+        .nav-item {
           width: 100%;
           
-          a {
+          .nav-link {
             text-align: center;
             width: 100%;
           }

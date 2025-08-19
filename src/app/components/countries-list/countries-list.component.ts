@@ -6,15 +6,14 @@ export interface Country {
   name: string;
   capital: string;
   population: number;
-  region: string;
   flag?: string;
 }
 
 // V1 - Hardcoded data
 export const COUNTRIES: Country[] = [
-  { name: 'France', capital: 'Paris', population: 67000000, region: 'Europe' },
-  { name: 'Japan', capital: 'Tokyo', population: 125000000, region: 'Asia' },
-  { name: 'Brazil', capital: 'Brasília', population: 213000000, region: 'Americas' },
+  { name: 'France', capital: 'Paris', population: 67000000 },
+  { name: 'Japan', capital: 'Tokyo', population: 125000000 },
+  { name: 'Brazil', capital: 'Brasília', population: 213000000 },
 ];
 
 @Component({
@@ -49,14 +48,13 @@ export class CountriesListComponent implements OnInit {
 
   loadFromAPI() {
     this.loading = true;
-    this.http.get<any[]>('https://restcountries.com/v3.1/all?fields=name,capital,population,region,flags')
+    this.http.get<any[]>('https://restcountries.com/v3.1/all?fields=name,capital,population,flags')
       .subscribe({
         next: (data) => {
           this.countries = data.map(country => ({
             name: country.name.common,
             capital: country.capital?.[0] || 'N/A',
             population: country.population,
-            region: country.region || 'N/A',
             flag: country.flags?.svg
           }));
           this.loading = false;
