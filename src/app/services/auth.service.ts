@@ -58,6 +58,8 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
   /**
@@ -78,7 +80,7 @@ export class AuthService {
    * Vérifie si l'utilisateur est connecté
    */
   isAuthenticated(): boolean {
-    const token = this.getToken();
+    const token = this.getToken() || localStorage.getItem('token');
     return token !== null && token !== '';
   }
 
@@ -93,7 +95,7 @@ export class AuthService {
    * Récupère les données utilisateur
    */
   getCurrentUser(): any {
-    const user = localStorage.getItem('currentUser');
+    const user = localStorage.getItem('currentUser') || localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 }

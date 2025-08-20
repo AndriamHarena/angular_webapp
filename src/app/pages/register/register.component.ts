@@ -64,11 +64,18 @@ export class RegisterComponent {
     this.authService.register(registerRequest).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
-        this.toastService.showSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
+        
+        // Sauvegarder le token et les données utilisateur via AuthService
+        if (response.token && response.user) {
+          this.authService.saveToken(response.token);
+          this.authService.saveUser(response.user);
+        }
+        
+        this.toastService.showSuccess('Inscription réussie ! Redirection vers votre profil...');
         
         setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 2000);
+          this.router.navigate(['/profile']);
+        }, 1500);
       },
       error: (error) => {
         console.error('Registration error:', error);

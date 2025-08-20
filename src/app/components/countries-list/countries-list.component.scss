@@ -14,8 +14,9 @@
 }
 
 .countries-header h2 {
-  color: #333;
+  color: var(--text-color);
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .toggle-button {
@@ -35,27 +36,31 @@
 }
 
 .data-source-info {
-  background: #f8f9fa;
+  background: var(--footer-background);
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 2rem;
   border-left: 4px solid #9415F0;
+  transition: background-color 0.3s ease;
 }
 
 .data-source-info p {
   margin: 0;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 /* Styles pour les filtres */
 .filters-container {
-  background: white;
-  border: 1px solid #e9ecef;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
 .filter-row, .sort-row {
@@ -75,16 +80,19 @@
 
 .search-filter label, .continent-filter label, .sort-filter label {
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   font-size: 0.9rem;
+  transition: color 0.3s ease;
 }
 
 .search-input, .continent-select, .sort-select {
   padding: 0.75rem;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
 .search-input:focus, .continent-select:focus, .sort-select:focus {
@@ -93,8 +101,9 @@
 }
 
 .sort-order-btn {
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
+  background: var(--footer-background);
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
   padding: 0.75rem 1rem;
   border-radius: 8px;
   cursor: pointer;
@@ -119,15 +128,19 @@
 
 .results-info p {
   margin: 0;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
   font-weight: 500;
   text-align: center;
+  transition: color 0.3s ease;
 }
 
 .loading {
   text-align: center;
   padding: 3rem;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
+  transition: color 0.3s ease;
 }
 
 .countries-grid {
@@ -138,12 +151,12 @@
 }
 
 .country-card {
-  background: white;
+  background: var(--card-background);
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--shadow-color);
   transition: all 0.3s ease;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-color);
 }
 
 .country-card:hover {
@@ -165,20 +178,24 @@
 }
 
 .country-info h3 {
-  color: #333;
+  color: var(--text-color);
   margin: 0 0 0.75rem 0;
   font-size: 1.25rem;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .country-info p {
   margin: 0.5rem 0;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.8;
   line-height: 1.5;
+  transition: color 0.3s ease;
 }
 
 .country-info strong {
-  color: #333;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 /* Responsive design */

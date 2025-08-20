@@ -1,5 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
 
+// Variables CSS pour le dark mode
+:root {
+  --primary-color: #9415F0;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --card-background: #ffffff;
+  --header-background: #ffffff;
+  --footer-background: #f8f9fa;
+  --input-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+// Mode sombre
+body.dark-mode {
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --border-color: #333333;
+  --card-background: #000000;
+  --header-background: #000000;
+  --footer-background: #000000;
+  --input-background: #000000;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+// Application globale des variables
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Styles pour les cartes
+.card, .profile-card, .auth-card {
+  background-color: var(--card-background) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 20px var(--shadow-color) !important;
+}
+
+// Styles pour les inputs
+input, textarea, select {
+  background-color: var(--input-background) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+
+  &::placeholder {
+    color: var(--text-color) !important;
+    opacity: 0.6;
+  }
+}
+
+// Styles pour les boutons
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), #7c3aed) !important;
+  border: none !important;
+}
+
+// Styles pour le header
+header, .header {
+  background-color: var(--header-background) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+// Styles pour le footer
+footer, .footer {
+  background-color: var(--footer-background) !important;
+  border-top-color: var(--border-color) !important;
+}
+
+// Styles pour les liens
+a {
+  color: var(--primary-color) !important;
+  
+  &:hover {
+    color: #7c3aed !important;
+  }
+}
+
+// Styles pour les toasts
+.toast {
+  background-color: var(--card-background) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+// Styles pour les pays (countries list)
+.country-card {
+  background-color: var(--card-background) !important;
+  border-color: var(--border-color) !important;
+  
+  h3, p {
+    color: var(--text-color) !important;
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {

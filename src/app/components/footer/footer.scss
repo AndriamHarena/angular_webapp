@@ -1,9 +1,10 @@
 .footer {
-  background-color: #f8f9fa;
-  color: #424242;
+  background-color: var(--footer-background);
+  color: var(--text-color);
   padding: 3rem 0 2rem;
   margin-top: auto;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 
   .footer-content {
     max-width: 1200px;
@@ -19,17 +20,20 @@
       flex-direction: column;
       
       h3 {
-        color: #212121;
+        color: var(--text-color);
         margin-bottom: 1.5rem;
         font-size: 1rem;
         font-weight: 600;
+        transition: color 0.3s ease;
       }
 
       p {
         margin-bottom: 1rem;
-        color: #616161;
+        color: var(--text-color);
+        opacity: 0.8;
         line-height: 1.5;
         font-size: 0.875rem;
+        transition: color 0.3s ease;
       }
 
       .social-links {
@@ -41,7 +45,8 @@
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          color: #424242;
+          color: var(--text-color);
+          opacity: 0.8;
           text-decoration: none;
           transition: all 0.2s ease;
           font-size: 0.875rem;
@@ -73,7 +78,8 @@
 
         li {
           a {
-            color: #424242;
+            color: var(--text-color);
+            opacity: 0.8;
             text-decoration: none;
             transition: all 0.2s ease;
             display: block;
@@ -81,6 +87,7 @@
 
             &:hover {
               color: #9415F0;
+              opacity: 1;
             }
           }
         }
@@ -97,15 +104,16 @@
           
           input[type="email"] {
             padding: 0.75rem;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            background-color: #ffffff;
-            color: #424242;
+            background-color: var(--input-background);
+            color: var(--text-color);
             font-size: 0.875rem;
             transition: all 0.2s ease;
             
             &::placeholder {
-              color: #9e9e9e;
+              color: var(--text-color);
+              opacity: 0.6;
             }
             
             &:focus {
@@ -143,15 +151,17 @@
   }
 
   .footer-bottom {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--border-color);
     margin-top: 2rem;
     padding-top: 1.5rem;
     text-align: center;
 
     p {
       margin: 0;
-      color: #616161;
+      color: var(--text-color);
+      opacity: 0.7;
       font-size: 0.75rem;
+      transition: color 0.3s ease;
     }
   }
 }

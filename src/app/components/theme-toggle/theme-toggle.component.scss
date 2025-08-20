@@ -1,0 +1,35 @@
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(148, 21, 240, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .theme-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .theme-icon {
+    transform: rotate(20deg);
+  }
+}
+
+// Styles spécifiques au bouton toggle
