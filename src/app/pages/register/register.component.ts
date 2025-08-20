@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
+import { AuthService, RegisterRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,11 @@ export class RegisterComponent {
     confirmPassword: ''
   };
 
-  constructor(private router: Router, private toastService: ToastService) {}
+  constructor(
+    private router: Router, 
+    private toastService: ToastService,
+    private authService: AuthService
+  ) {}
 
   onSubmit() {
     // Validation des champs
@@ -54,12 +59,38 @@ export class RegisterComponent {
       return;
     }
     
-    console.log('Register form submitted:', this.registerData);
-    this.toastService.showSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
-    
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 2000);
+    // Préparer les données pour l'API
+    const registerRequest: RegisterRequest = {
+      firstName: this.registerData.firstName,
+      lastName: this.registerData.lastName,
+      email: this.registerData.email,
+      password: this.registerData.password
+    };
+
+    // Appel à l'API via AuthService
+    this.authService.register(registerRequest).subscribe({
+      next: (response) => {
+        console.log('Registration successful:', response);
+        this.toastService.showSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
+        
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2000);
+      },
+      error: (error) => {
+        console.error('Registration error:', error);
+        
+        if (error.status === 400) {
+          this.toastService.showError('Données invalides. Vérifiez vos informations.');
+        } else if (error.status === 409) {
+          this.toastService.showError('Un compte avec cet email existe déjà.');
+        } else if (error.status === 0) {
+          this.toastService.showError('Impossible de contacter le serveur. Vérifiez votre connexion.');
+        } else {
+          this.toastService.showError('Erreur lors de l\'inscription. Réessayez plus tard.');
+        }
+      }
+    });
   }
 
   goToLogin() {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
+import { AuthService, LoginRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,11 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private router: Router, private toastService: ToastService) {}
+  constructor(
+    private router: Router, 
+    private toastService: ToastService,
+    private authService: AuthService
+  ) {}
 
   onSubmit() {
     // Validation des champs
@@ -36,44 +41,48 @@ export class LoginComponent {
       return;
     }
     
-    console.log('Login form submitted:', this.loginData);
-    console.log('Attempting authentication for:', this.loginData.email, this.loginData.password);
-    
-    // Simulation d'authentification avec des comptes de test
-    if (this.authenticateUser(this.loginData.email, this.loginData.password)) {
-      this.toastService.showSuccess('Connexion réussie ! Bienvenue.');
-      
-      // Redirection vers home après connexion réussie
-      setTimeout(() => {
-        this.router.navigate(['/home']);
-      }, 1500);
-    } else {
-      this.toastService.showError('Email ou mot de passe incorrect');
-    }
+    // Préparer les données pour l'API
+    const loginRequest: LoginRequest = {
+      email: this.loginData.email,
+      password: this.loginData.password
+    };
+
+    // Appel à l'API via AuthService
+    this.authService.login(loginRequest).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+        
+        // Sauvegarder le token et les données utilisateur
+        if (response.token) {
+          this.authService.saveToken(response.token);
+        }
+        if (response.user) {
+          this.authService.saveUser(response.user);
+        }
+        
+        this.toastService.showSuccess('Connexion réussie ! Bienvenue.');
+        
+        // Redirection vers home après connexion réussie
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1500);
+      },
+      error: (error) => {
+        console.error('Login error:', error);
+        
+        if (error.status === 401) {
+          this.toastService.showError('Email ou mot de passe incorrect');
+        } else if (error.status === 404) {
+          this.toastService.showError('Aucun compte trouvé avec cet email');
+        } else if (error.status === 0) {
+          this.toastService.showError('Impossible de contacter le serveur. Vérifiez votre connexion.');
+        } else {
+          this.toastService.showError('Erreur lors de la connexion. Réessayez plus tard.');
+        }
+      }
+    });
   }
 
-  private authenticateUser(email: string, password: string): boolean {
-    // Comptes de test pour la démonstration
-    const testAccounts = [
-      { email: 'admin@test.com', password: 'admin123' },
-      { email: 'user@test.com', password: 'user123' },
-      { email: 'demo@example.com', password: 'demo123' },
-      { email: 'john@example.com', password: '123456' }
-    ];
-    
-    console.log('Available test accounts:', testAccounts);
-    console.log('Checking email:', email.toLowerCase());
-    console.log('Checking password:', password);
-    
-    const found = testAccounts.find(account => 
-      account.email.toLowerCase() === email.toLowerCase() && 
-      account.password === password
-    );
-    
-    console.log('Found matching account:', found);
-    
-    return !!found;
-  }
 
   goToRegister() {
     this.router.navigate(['/register']);
