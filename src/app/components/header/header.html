@@ -16,12 +16,26 @@
                 <li class="nav-item">
                     <a routerLink="/contact" class="nav-link">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a routerLink="/login" class="nav-link">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/register" class="nav-link">Inscription</a>
-                </li>
+                
+                <!-- Navigation pour utilisateurs non connectés -->
+                <ng-container *ngIf="!isAuthenticated">
+                    <li class="nav-item">
+                        <a routerLink="/login" class="nav-link">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="/register" class="nav-link">Inscription</a>
+                    </li>
+                </ng-container>
+                
+                <!-- Navigation pour utilisateurs connectés -->
+                <ng-container *ngIf="isAuthenticated">
+                    <li class="nav-item">
+                        <a routerLink="/profile" class="nav-link profile-link">
+                            <span class="user-name">{{ currentUser?.name }}</span>
+                            <span class="profile-text">Profil</span>
+                        </a>
+                    </li>
+                </ng-container>
             </ul>
         </nav>
     </div>

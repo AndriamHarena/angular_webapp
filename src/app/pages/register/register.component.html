@@ -4,32 +4,17 @@
     <p class="register-subtitle">Créez votre compte</p>
     
     <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="register-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="firstName">Prénom</label>
-          <input 
-            type="text" 
-            id="firstName" 
-            name="firstName"
-            [(ngModel)]="registerData.firstName"
-            required
-            class="form-control"
-            placeholder="Votre prénom"
-          >
-        </div>
-        
-        <div class="form-group">
-          <label for="lastName">Nom</label>
-          <input 
-            type="text" 
-            id="lastName" 
-            name="lastName"
-            [(ngModel)]="registerData.lastName"
-            required
-            class="form-control"
-            placeholder="Votre nom"
-          >
-        </div>
+      <div class="form-group">
+        <label for="name">Nom complet</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name"
+          [(ngModel)]="registerData.name"
+          required
+          class="form-control"
+          placeholder="Votre nom complet"
+        >
       </div>
       
       <div class="form-group">

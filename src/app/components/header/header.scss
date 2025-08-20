@@ -51,6 +51,30 @@
             &:hover {
               color: #9415F0;
             }
+            
+            &.profile-link {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 2px;
+              
+              .user-name {
+                font-size: 0.75rem;
+                color: #9415F0;
+                font-weight: 600;
+              }
+              
+              .profile-text {
+                font-size: 0.875rem;
+                color: #424242;
+              }
+              
+              &:hover {
+                .profile-text {
+                  color: #9415F0;
+                }
+              }
+            }
           }
         }
       }

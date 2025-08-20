@@ -1,0 +1,36 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <h1 class="profile-title">Mon Profil</h1>
+      <p class="profile-subtitle">Informations de votre compte</p>
+    </div>
+
+    <div class="profile-content" *ngIf="user">
+      <div class="user-info">
+        <div class="info-item">
+          <label>Nom complet</label>
+          <p>{{ user.name }}</p>
+        </div>
+        
+        <div class="info-item">
+          <label>Email</label>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="logout-button" (click)="logout()">
+          Se déconnecter
+        </button>
+        
+        <button class="home-button" routerLink="/home">
+          Retour à l'accueil
+        </button>
+      </div>
+    </div>
+
+    <div class="loading" *ngIf="!user">
+      <p>Chargement des informations...</p>
+    </div>
+  </div>
+</div>

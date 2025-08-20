@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
 import { AuthService, RegisterRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   registerData = {
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -29,12 +28,7 @@ export class RegisterComponent {
 
   onSubmit() {
     // Validation des champs
-    if (!this.registerData.firstName.trim()) {
-      this.toastService.showError('Le prénom est requis');
-      return;
-    }
-    
-    if (!this.registerData.lastName.trim()) {
+    if (!this.registerData.name.trim()) {
       this.toastService.showError('Le nom est requis');
       return;
     }
@@ -61,8 +55,7 @@ export class RegisterComponent {
     
     // Préparer les données pour l'API
     const registerRequest: RegisterRequest = {
-      firstName: this.registerData.firstName,
-      lastName: this.registerData.lastName,
+      name: this.registerData.name,
       email: this.registerData.email,
       password: this.registerData.password
     };

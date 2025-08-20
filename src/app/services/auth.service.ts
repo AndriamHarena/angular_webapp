@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface RegisterRequest {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -21,8 +20,7 @@ export interface AuthResponse {
   user?: {
     id: string;
     email: string;
-    firstName: string;
-    lastName: string;
+    name: string;
   };
 }
 
@@ -30,7 +28,7 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth'; // URL du backend
+  private apiUrl = 'http://localhost:3000/api/auth'; 
 
   private httpOptions = {
     headers: new HttpHeaders({

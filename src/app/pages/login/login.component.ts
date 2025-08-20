@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
 import { AuthService, LoginRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -62,9 +62,9 @@ export class LoginComponent {
         
         this.toastService.showSuccess('Connexion réussie ! Bienvenue.');
         
-        // Redirection vers home après connexion réussie
+        // Redirection vers profile après connexion réussie
         setTimeout(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/profile']);
         }, 1500);
       },
       error: (error) => {
