@@ -31,6 +31,22 @@ export class ProfileComponent implements OnInit {
     this.user = this.authService.getCurrentUser();
   }
 
+  editProfile() {
+    this.toastService.showInfo('Fonctionnalité de modification du profil à venir');
+    // TODO: Implémenter la page d'édition du profil
+  }
+
+  deleteAccount() {
+    const confirmDelete = confirm(
+      'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.'
+    );
+    
+    if (confirmDelete) {
+      // TODO: Implémenter l'API de suppression de compte
+      this.toastService.showError('Fonctionnalité de suppression de compte à venir');
+    }
+  }
+
   logout() {
     this.authService.logout();
     this.toastService.showSuccess('Déconnexion réussie');

@@ -19,12 +19,20 @@
       </div>
 
       <div class="profile-actions">
+        <button class="edit-button" (click)="editProfile()">
+          Modifier le profil
+        </button>
+        
         <button class="logout-button" (click)="logout()">
           Se déconnecter
         </button>
         
         <button class="home-button" routerLink="/home">
           Retour à l'accueil
+        </button>
+        
+        <button class="delete-button" (click)="deleteAccount()">
+          Supprimer le compte
         </button>
       </div>
     </div>
