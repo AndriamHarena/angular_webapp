@@ -23,9 +23,22 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the user authentication API.' });
 });
 
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - Headers:`, req.headers.authorization ? 'Token present' : 'No token');
+  next();
+});
+
 // Set up routes
+console.log('Setting up routes...');
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+console.log('Routes configured: /api/auth and /api/users');
+
+// Add a test route to verify users endpoint
+app.get('/api/users/test', (req, res) => {
+  res.json({ message: 'Users endpoint is working' });
+});
 
 // Set port, listen for requests
 const PORT = process.env.PORT || 3000;

@@ -6,7 +6,8 @@
     </div>
 
     <div class="profile-content" *ngIf="user">
-      <div class="user-info">
+      <!-- Mode lecture -->
+      <div class="user-info" *ngIf="!isEditing">
         <div class="info-item">
           <label>Nom complet</label>
           <p>{{ user.name }}</p>
@@ -18,7 +19,116 @@
         </div>
       </div>
 
-      <div class="profile-actions">
+      <!-- Mode édition -->
+      <div class="edit-form" *ngIf="isEditing">
+        <form #editForm="ngForm" (ngSubmit)="saveProfile(editForm)">
+          <div class="form-section">
+            <h3>Informations personnelles</h3>
+            
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                [(ngModel)]="editData.name"
+                #nameInput="ngModel"
+                required
+                minlength="2"
+                class="form-control"
+                placeholder="Votre nom complet"
+              >
+              <div class="error-message" *ngIf="nameInput.invalid && nameInput.touched">
+                <span *ngIf="nameInput.errors?.['required']">Le nom est requis</span>
+                <span *ngIf="nameInput.errors?.['minlength']">Le nom doit contenir au moins 2 caractères</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                [(ngModel)]="editData.email"
+                #emailInput="ngModel"
+                required
+                email
+                class="form-control"
+                placeholder="votre@email.com"
+              >
+              <div class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
+                <span *ngIf="emailInput.errors?.['required']">L'email est requis</span>
+                <span *ngIf="emailInput.errors?.['email']">Format d'email invalide</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Changer le mot de passe (optionnel)</h3>
+            
+            <div class="form-group">
+              <label for="currentPassword">Mot de passe actuel</label>
+              <input
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                [(ngModel)]="editData.currentPassword"
+                class="form-control"
+                placeholder="Votre mot de passe actuel"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword">Nouveau mot de passe</label>
+              <input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                [(ngModel)]="editData.newPassword"
+                #newPasswordInput="ngModel"
+                minlength="6"
+                class="form-control"
+                placeholder="Nouveau mot de passe (min. 6 caractères)"
+              >
+              <div class="error-message" *ngIf="newPasswordInput.invalid && newPasswordInput.touched">
+                <span *ngIf="newPasswordInput.errors?.['minlength']">Le mot de passe doit contenir au moins 6 caractères</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                [(ngModel)]="editData.confirmPassword"
+                class="form-control"
+                placeholder="Confirmer le nouveau mot de passe"
+              >
+              <div class="error-message" *ngIf="editData.newPassword && editData.confirmPassword && editData.newPassword !== editData.confirmPassword">
+                Les mots de passe ne correspondent pas
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button 
+              type="submit" 
+              class="save-button"
+              [disabled]="editForm.invalid || (editData.newPassword && editData.newPassword !== editData.confirmPassword) || isLoading"
+            >
+              {{ isLoading ? 'Enregistrement...' : 'Enregistrer' }}
+            </button>
+            
+            <button type="button" class="cancel-button" (click)="cancelEdit()">
+              Annuler
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="profile-actions" *ngIf="!isEditing">
         <button class="edit-button" (click)="editProfile()">
           Modifier le profil
         </button>

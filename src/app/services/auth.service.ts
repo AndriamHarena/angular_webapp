@@ -28,7 +28,8 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth'; 
+  private authApiUrl = 'http://localhost:3000/api/auth';
+  private userApiUrl = 'http://localhost:3000/api/users'; 
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -42,14 +43,14 @@ export class AuthService {
    * Inscription d'un nouvel utilisateur
    */
   register(userData: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData, this.httpOptions);
+    return this.http.post<AuthResponse>(`${this.authApiUrl}/register`, userData, this.httpOptions);
   }
 
   /**
    * Connexion d'un utilisateur
    */
   login(credentials: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials, this.httpOptions);
+    return this.http.post<AuthResponse>(`${this.authApiUrl}/login`, credentials, this.httpOptions);
   }
 
   /**
@@ -60,6 +61,26 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+  }
+
+  updateProfile(updateData: any): Observable<any> {
+    return this.http.put(`${this.userApiUrl}/profile`, updateData, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    });
+  }
+
+  updateUserData(userData: any) {
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
+
+  deleteAccount(): Observable<any> {
+    return this.http.delete(`${this.userApiUrl}/account`, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    });
   }
 
   /**
