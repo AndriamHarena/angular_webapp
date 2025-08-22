@@ -110,6 +110,38 @@ a {
   background-color: var(--card-background) !important;
   color: var(--text-color) !important;
   border-color: var(--border-color) !important;
+  
+  &.toast-success {
+    border-left-color: var(--success-color) !important;
+    
+    .toast-icon {
+      color: var(--success-color) !important;
+    }
+  }
+  
+  &.toast-error {
+    border-left-color: var(--error-color) !important;
+    
+    .toast-icon {
+      color: var(--error-color) !important;
+    }
+  }
+  
+  &.toast-warning {
+    border-left-color: var(--warning-color) !important;
+    
+    .toast-icon {
+      color: var(--warning-color) !important;
+    }
+  }
+  
+  &.toast-info {
+    border-left-color: var(--info-color) !important;
+    
+    .toast-icon {
+      color: var(--info-color) !important;
+    }
+  }
 }
 
 // Styles pour les pays (countries list)

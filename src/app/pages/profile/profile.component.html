@@ -6,7 +6,6 @@
     </div>
 
     <div class="profile-content" *ngIf="user">
-      <!-- Mode lecture -->
       <div class="user-info" *ngIf="!isEditing">
         <div class="info-item">
           <label>Nom complet</label>
@@ -19,7 +18,6 @@
         </div>
       </div>
 
-      <!-- Mode édition -->
       <div class="edit-form" *ngIf="isEditing">
         <form #editForm="ngForm" (ngSubmit)="saveProfile(editForm)">
           <div class="form-section">
@@ -56,11 +54,10 @@
                 email
                 class="form-control"
                 placeholder="votre@email.com"
+                disabled
+                readonly
               >
-              <div class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
-                <span *ngIf="emailInput.errors?.['required']">L'email est requis</span>
-                <span *ngIf="emailInput.errors?.['email']">Format d'email invalide</span>
-              </div>
+              <small class="security-note">L'email ne peut pas être modifié pour des raisons de sécurité</small>
             </div>
           </div>
 

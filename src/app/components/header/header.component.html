@@ -17,7 +17,6 @@
                     <a routerLink="/contact" class="nav-link">Contact</a>
                 </li>
                 
-                <!-- Navigation pour utilisateurs non connectés -->
                 <ng-container *ngIf="!isAuthenticated">
                     <li class="nav-item">
                         <a routerLink="/login" class="nav-link">Connexion</a>
@@ -27,7 +26,6 @@
                     </li>
                 </ng-container>
                 
-                <!-- Navigation pour utilisateurs connectés -->
                 <ng-container *ngIf="isAuthenticated">
                     <li class="nav-item user-dropdown" 
                         (mouseenter)="showDropdown = true" 
@@ -68,7 +66,6 @@
             </ul>
         </nav>
         
-        <!-- Bouton toggle dark mode -->
         <div class="theme-toggle-container">
             <app-theme-toggle></app-theme-toggle>
         </div>

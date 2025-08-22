@@ -23,23 +23,14 @@ export class AuthService {
     private userContextService: UserContextService
   ) { }
 
-  /**
-   * Inscription d'un nouvel utilisateur
-   */
   register(userData: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.authApiUrl}/register`, userData, this.httpOptions);
   }
 
-  /**
-   * Connexion d'un utilisateur
-   */
   login(credentials: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.authApiUrl}/login`, credentials, this.httpOptions);
   }
 
-  /**
-   * Déconnexion (supprime le token du localStorage)
-   */
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
@@ -68,47 +59,29 @@ export class AuthService {
     });
   }
 
-  /**
-   * Sauvegarde le token d'authentification
-   */
   saveToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
 
-  /**
-   * Récupère le token d'authentification
-   */
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  /**
-   * Vérifie si l'utilisateur est connecté
-   */
   isAuthenticated(): boolean {
     const token = this.getToken() || localStorage.getItem('token');
     return token !== null && token !== '';
   }
 
-  /**
-   * Sauvegarde les données utilisateur
-   */
   saveUser(user: any): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.userContextService.setUser(user);
   }
 
-  /**
-   * Récupère les données utilisateur
-   */
   getCurrentUser(): any {
     const user = localStorage.getItem('currentUser') || localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
-  /**
-   * Initialise le contexte utilisateur au démarrage
-   */
   initializeUserContext(): void {
     const user = this.getCurrentUser();
     if (user && this.isAuthenticated()) {

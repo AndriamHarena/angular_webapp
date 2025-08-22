@@ -28,13 +28,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Écouter les changements d'utilisateur depuis le contexte
     this.userSubscription = this.userContextService.user$.subscribe(user => {
       this.currentUser = user;
       this.isAuthenticated = user !== null;
     });
     
-    // Écouter les changements de route pour mettre à jour l'état d'authentification
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {

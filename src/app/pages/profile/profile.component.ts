@@ -80,8 +80,7 @@ export class ProfileComponent implements OnInit {
 
     // Préparer les données à envoyer
     const updateData: any = {
-      name: this.editData.name,
-      email: this.editData.email
+      name: this.editData.name
     };
 
     // Ajouter les données de mot de passe si nécessaire
@@ -100,7 +99,7 @@ export class ProfileComponent implements OnInit {
       next: (response) => {
         this.toastService.showSuccess('Profil mis à jour avec succès');
         // Mettre à jour les données utilisateur locales
-        this.user = { ...this.user, name: updateData.name, email: updateData.email };
+        this.user = { ...this.user, name: updateData.name };
         this.authService.updateUserData(this.user);
         this.isEditing = false;
         this.isLoading = false;

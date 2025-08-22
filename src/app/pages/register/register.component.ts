@@ -73,10 +73,10 @@ export class RegisterComponent {
           this.authService.saveUser(response.user);
         }
         
-        this.toastService.showSuccess('Inscription réussie ! Redirection vers votre profil...');
+        this.toastService.showSuccess('Inscription réussie ! Redirection vers l\'accueil...');
         
         setTimeout(() => {
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/home']);
         }, 1500);
       },
       error: (error) => {

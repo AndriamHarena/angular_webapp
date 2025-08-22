@@ -18,34 +18,34 @@
     transition: all 0.3s ease;
     
     &.toast-success {
-      border-left-color: #4caf50;
+      border-left-color: var(--success-color) !important;
       
       .toast-icon {
-        color: #4caf50;
+        color: var(--success-color) !important;
       }
     }
     
     &.toast-error {
-      border-left-color: #f44336;
+      border-left-color: var(--error-color) !important;
       
       .toast-icon {
-        color: #f44336;
+        color: var(--error-color) !important;
       }
     }
     
     &.toast-warning {
-      border-left-color: #ff9800;
+      border-left-color: var(--warning-color) !important;
       
       .toast-icon {
-        color: #ff9800;
+        color: var(--warning-color) !important;
       }
     }
     
     &.toast-info {
-      border-left-color: #2196f3;
+      border-left-color: var(--info-color) !important;
       
       .toast-icon {
-        color: #2196f3;
+        color: var(--info-color) !important;
       }
     }
     

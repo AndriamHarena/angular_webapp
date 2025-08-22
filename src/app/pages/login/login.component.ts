@@ -63,9 +63,9 @@ export class LoginComponent {
         
         this.toastService.showSuccess('Connexion réussie ! Bienvenue.');
         
-        // Redirection vers profile après connexion réussie
+        // Redirection vers home après connexion réussie
         setTimeout(() => {
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/home']);
         }, 1500);
       },
       error: (error) => {

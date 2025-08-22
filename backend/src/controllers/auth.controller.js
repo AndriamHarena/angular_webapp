@@ -3,10 +3,8 @@ const User = db.user;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// User registration
 exports.register = async (req, res) => {
   try {
-    // Validate request
     if (!req.body.name || !req.body.email || !req.body.password) {
       return res.status(400).json({ 
         success: false,
@@ -14,7 +12,6 @@ exports.register = async (req, res) => {
       });
     }
     
-    // Check if user already exists
     const existingUser = await User.findOne({ where: { email: req.body.email } });
     if (existingUser) {
       return res.status(409).json({ 
@@ -23,24 +20,20 @@ exports.register = async (req, res) => {
       });
     }
     
-    // Hash the password
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
     
-    // Create new user
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword
     });
     
-    // Generate JWT token
     const token = jwt.sign(
       { id: user.id },
       process.env.JWT_SECRET || 'your_jwt_secret_key_change_in_production',
-      { expiresIn: 86400 } // 24 hours
+      { expiresIn: 86400 }
     );
     
-    // Return user information and token
     res.status(201).json({
       success: true,
       message: 'Inscription réussie',
@@ -56,10 +49,8 @@ exports.register = async (req, res) => {
   }
 };
 
-// User login
 exports.login = async (req, res) => {
   try {
-    // Validate request
     if (!req.body.email || !req.body.password) {
       return res.status(400).json({ 
         success: false,
@@ -67,10 +58,8 @@ exports.login = async (req, res) => {
       });
     }
     
-    // Find user by email
     const user = await User.findOne({ where: { email: req.body.email } });
     
-    // Check if user exists and validate password
     if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
       return res.status(401).json({ 
         success: false,
@@ -78,14 +67,12 @@ exports.login = async (req, res) => {
       });
     }
     
-    // Generate JWT token
     const token = jwt.sign(
       { id: user.id },
       process.env.JWT_SECRET || 'your_jwt_secret_key_change_in_production',
-      { expiresIn: 86400 } // 24 hours
+      { expiresIn: 86400 }
     );
     
-    // Return user information and token
     res.status(200).json({
       success: true,
       message: 'Connexion réussie',
@@ -101,13 +88,11 @@ exports.login = async (req, res) => {
   }
 };
 
-// Update user profile
 exports.updateProfile = async (req, res) => {
   try {
-    const userId = req.userId; // From auth middleware
+    const userId = req.userId;
     const { name, email, currentPassword, newPassword } = req.body;
 
-    // Validate required fields
     if (!name || !email) {
       return res.status(400).json({ 
         success: false,
@@ -115,7 +100,6 @@ exports.updateProfile = async (req, res) => {
       });
     }
 
-    // Find the user
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({ 
@@ -124,7 +108,6 @@ exports.updateProfile = async (req, res) => {
       });
     }
 
-    // Check if email is being changed and if it's already taken
     if (email !== user.email) {
       const existingUser = await User.findOne({ where: { email: email } });
       if (existingUser) {
@@ -135,13 +118,11 @@ exports.updateProfile = async (req, res) => {
       }
     }
 
-    // Prepare update data
     const updateData = {
       name: name,
       email: email
     };
 
-    // Handle password change if requested
     if (newPassword) {
       if (!currentPassword) {
         return res.status(400).json({ 
@@ -150,7 +131,6 @@ exports.updateProfile = async (req, res) => {
         });
       }
 
-      // Verify current password
       if (!bcrypt.compareSync(currentPassword, user.password)) {
         return res.status(401).json({ 
           success: false,
@@ -158,7 +138,6 @@ exports.updateProfile = async (req, res) => {
         });
       }
 
-      // Validate new password length
       if (newPassword.length < 6) {
         return res.status(400).json({ 
           success: false,
@@ -166,14 +145,11 @@ exports.updateProfile = async (req, res) => {
         });
       }
 
-      // Hash new password
       updateData.password = bcrypt.hashSync(newPassword, 8);
     }
 
-    // Update user
     await User.update(updateData, { where: { id: userId } });
 
-    // Return updated user information
     res.status(200).json({
       success: true,
       message: 'Profil mis à jour avec succès',
@@ -191,12 +167,10 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-// Delete user account
 exports.deleteAccount = async (req, res) => {
   try {
-    const userId = req.userId; // From auth middleware
+    const userId = req.userId;
 
-    // Find the user
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({ 
@@ -205,10 +179,8 @@ exports.deleteAccount = async (req, res) => {
       });
     }
 
-    // Delete the user
     await User.destroy({ where: { id: userId } });
 
-    // Return success message
     res.status(200).json({
       success: true,
       message: 'Compte supprimé avec succès'
