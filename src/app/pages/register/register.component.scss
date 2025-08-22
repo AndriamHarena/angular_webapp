@@ -1,31 +1,31 @@
 .register-container {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 70vh;
-  padding: 2rem 0;
-  width: 100%;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 50%, var(--primary-color) 100%);
+  padding: 20px;
   
   .register-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: var(--card-background);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px var(--shadow-color);
     padding: 3rem;
     width: 100%;
     max-width: 500px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-color);
     margin: 0 auto;
     
     .register-title {
       font-size: 2rem;
       font-weight: 700;
-      color: #212121;
+      color: var(--text-color);
       text-align: center;
       margin-bottom: 0.5rem;
     }
     
     .register-subtitle {
-      color: #616161;
+      color: var(--text-secondary);
       text-align: center;
       margin-bottom: 2rem;
       font-size: 1rem;
@@ -51,37 +51,38 @@
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
-          color: #424242;
+          color: var(--text-color);
           font-size: 0.9rem;
         }
         
         .form-control {
           width: 100%;
           padding: 0.875rem;
-          border: 1px solid #e0e0e0;
+          border: 1px solid var(--input-border);
           border-radius: 8px;
           font-size: 1rem;
           transition: all 0.2s ease;
-          background-color: #fafafa;
+          background-color: var(--input-background);
+          color: var(--text-color);
           box-sizing: border-box;
           
           &:focus {
             outline: none;
-            border-color: #9415F0;
-            box-shadow: 0 0 0 3px rgba(148, 21, 240, 0.1);
-            background-color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
+            background-color: var(--input-background);
           }
           
           &::placeholder {
-            color: #9e9e9e;
+            color: var(--text-muted);
           }
         }
       }
       
       .register-button {
         width: 100%;
-        background-color: #9415F0;
-        color: white;
+        background-color: var(--primary-color);
+        color: var(--text-color);
         border: none;
         padding: 1rem;
         border-radius: 8px;
@@ -92,12 +93,12 @@
         margin-top: 1rem;
         
         &:hover:not(:disabled) {
-          background-color: #7c11cc;
+          background-color: #9c4dcc;
           transform: translateY(-1px);
         }
         
         &:disabled {
-          background-color: #bdbdbd;
+          background-color: var(--text-muted);
           cursor: not-allowed;
           transform: none;
         }
@@ -109,12 +110,12 @@
       margin-top: 2rem;
       
       p {
-        color: #616161;
+        color: var(--text-secondary);
         font-size: 0.9rem;
         margin: 0;
         
         .login-link {
-          color: #9415F0;
+          color: var(--primary-color);
           text-decoration: none;
           font-weight: 500;
           

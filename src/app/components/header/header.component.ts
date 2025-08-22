@@ -10,8 +10,8 @@ import { filter } from 'rxjs/operators';
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterLink, ThemeToggleComponent],
-  templateUrl: './header.html',
-  styleUrl: './header.scss'
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;

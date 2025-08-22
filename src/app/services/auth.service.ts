@@ -1,35 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface RegisterRequest {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface AuthResponse {
-  success: boolean;
-  message: string;
-  token?: string;
-  user?: {
-    id: string;
-    email: string;
-    name: string;
-  };
-}
+import { AuthResponse, LoginRequest, RegisterRequest } from '../interfaces/auth.interface';
+import { API_ENDPOINTS } from '../constants/api.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authApiUrl = 'http://localhost:3000/api/auth';
-  private userApiUrl = 'http://localhost:3000/api/users'; 
+  private authApiUrl = API_ENDPOINTS.BASE_URL + '/api/auth';
+  private userApiUrl = API_ENDPOINTS.BASE_URL + '/api/users'; 
 
   private httpOptions = {
     headers: new HttpHeaders({

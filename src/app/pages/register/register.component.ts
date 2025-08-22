@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
-import { AuthService, RegisterRequest } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
+import { RegisterRequest } from '../../interfaces/auth.interface';
 
 @Component({
   selector: 'app-register',
@@ -57,7 +58,8 @@ export class RegisterComponent {
     const registerRequest: RegisterRequest = {
       name: this.registerData.name,
       email: this.registerData.email,
-      password: this.registerData.password
+      password: this.registerData.password,
+      confirmPassword: this.registerData.confirmPassword
     };
 
     // Appel à l'API via AuthService

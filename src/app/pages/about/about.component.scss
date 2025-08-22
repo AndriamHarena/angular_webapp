@@ -7,7 +7,7 @@
     .about-title {
       font-size: 3rem;
       font-weight: 700;
-      color: #212121;
+      color: var(--text-color);
       text-align: center;
       margin-bottom: 3rem;
       
@@ -22,7 +22,7 @@
       h2 {
         font-size: 2rem;
         font-weight: 600;
-        color: #9415F0;
+        color: var(--primary-color);
         margin-bottom: 1.5rem;
         
         @media (max-width: 768px) {
@@ -33,11 +33,11 @@
       p {
         font-size: 1.1rem;
         line-height: 1.7;
-        color: #424242;
+        color: var(--text-color);
         margin-bottom: 1.5rem;
         
         strong {
-          color: #9415F0;
+          color: var(--primary-color);
           font-weight: 600;
         }
       }
@@ -49,29 +49,29 @@
         margin-top: 2rem;
         
         .feature-card {
-          background: white;
+          background: var(--card-background);
           border-radius: 12px;
           padding: 2rem;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-          border: 1px solid #e0e0e0;
+          box-shadow: 0 4px 15px var(--shadow-color);
+          border: 1px solid var(--border-color);
           transition: all 0.3s ease;
           
           &:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(148, 21, 240, 0.15);
+            box-shadow: 0 8px 25px rgba(187, 134, 252, 0.15);
           }
           
           h3 {
             font-size: 1.3rem;
             font-weight: 600;
-            color: #212121;
+            color: var(--text-color);
             margin-bottom: 1rem;
           }
           
           p {
             font-size: 1rem;
             line-height: 1.6;
-            color: #616161;
+            color: var(--text-secondary);
             margin: 0;
           }
         }

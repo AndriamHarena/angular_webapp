@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-footer',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './footer.html',
-  styleUrl: './footer.scss'
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
   newsletterEmail: string = '';
