@@ -17,6 +17,7 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   currentUser: User | null = null;
+  showDropdown = false;
   private routerSubscription: Subscription = new Subscription();
   private userSubscription: Subscription = new Subscription();
 
@@ -53,5 +54,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     } else {
       this.currentUser = null;
     }
+  }
+
+  getUserInitials(): string {
+    if (!this.currentUser?.name) return '?';
+    const names = this.currentUser.name.split(' ');
+    if (names.length >= 2) {
+      return (names[0][0] + names[1][0]).toUpperCase();
+    }
+    return this.currentUser.name[0].toUpperCase();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
