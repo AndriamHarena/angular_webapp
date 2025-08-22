@@ -231,7 +231,3 @@ This application demonstrates several advanced Angular concepts and best practic
 ## License
 
 This project is part of the Digital School of Paris curriculum and is intended for educational purposes.
-
-## Contact
-
-For questions or support regarding this project, please contact the development team at Digital School of Paris.
