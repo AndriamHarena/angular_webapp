@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UserContextService, User } from '../../services/user-context.service';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -15,13 +16,22 @@ import { filter } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  currentUser: any = null;
+  currentUser: User | null = null;
   private routerSubscription: Subscription = new Subscription();
+  private userSubscription: Subscription = new Subscription();
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private userContextService: UserContextService
+  ) {}
 
   ngOnInit() {
-    this.checkAuthStatus();
+    // Écouter les changements d'utilisateur depuis le contexte
+    this.userSubscription = this.userContextService.user$.subscribe(user => {
+      this.currentUser = user;
+      this.isAuthenticated = user !== null;
+    });
     
     // Écouter les changements de route pour mettre à jour l'état d'authentification
     this.routerSubscription = this.router.events
@@ -33,6 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routerSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
   checkAuthStatus() {

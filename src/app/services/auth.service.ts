@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../interfaces/auth.interface';
 import { API_ENDPOINTS } from '../constants/api.constants';
+import { UserContextService } from './user-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,10 @@ export class AuthService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userContextService: UserContextService
+  ) { }
 
   /**
    * Inscription d'un nouvel utilisateur
@@ -41,6 +45,7 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.userContextService.clearUser();
   }
 
   updateProfile(updateData: any): Observable<any> {
@@ -90,6 +95,7 @@ export class AuthService {
    */
   saveUser(user: any): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
+    this.userContextService.setUser(user);
   }
 
   /**
@@ -98,5 +104,15 @@ export class AuthService {
   getCurrentUser(): any {
     const user = localStorage.getItem('currentUser') || localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
+  }
+
+  /**
+   * Initialise le contexte utilisateur au démarrage
+   */
+  initializeUserContext(): void {
+    const user = this.getCurrentUser();
+    if (user && this.isAuthenticated()) {
+      this.userContextService.setUser(user);
+    }
   }
 }
